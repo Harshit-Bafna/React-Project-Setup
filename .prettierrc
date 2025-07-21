@@ -7,7 +7,7 @@
     "bracketSameLine": true,
     "printWidth": 150,
     "singleAttributePerLine": true,
-    "endOfLine": "auto",
+    "endOfLine": "crlf",
     "arrowParens": "always",
     "proseWrap": "preserve",
     "embeddedLanguageFormatting": "auto",

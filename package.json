@@ -5,11 +5,11 @@
     "type": "module",
     "scripts": {
         "prepare": "husky",
-        "lint:eslint": "eslint",
         "dev": "vite",
         "build": "tsc -b && vite build",
         "preview": "vite preview",
-        "lint": "eslint .",
+        "lint:eslint": "eslint",
+        "lint:stylelint": "stylelint \"**/*.css\"",
         "format:check": "prettier . --check",
         "format:fix": "prettier . --write"
     },
@@ -35,8 +35,12 @@
         "globals": "^16.3.0",
         "husky": "^9.1.7",
         "prettier": "^3.6.2",
+        "stylelint": "^16.22.0",
+        "stylelint-config-standard": "^38.0.0",
+        "stylelint-config-tailwindcss": "^1.0.0",
         "typescript": "~5.8.3",
         "typescript-eslint": "^8.35.1",
         "vite": "^7.0.4"
     }
 }
+
