@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 import { defineConfig, loadEnv, type ServerOptions } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import path from 'path'
 
 type TMode = 'development' | 'production'
 
@@ -30,7 +32,6 @@ const normalizePort = (port: string) => {
 
 export default defineConfig(({ mode }) => {
     const envMode = mode as TMode
-    // eslint-disable-next-line no-undef
     const env = loadEnv(envMode, process.cwd(), '') as unknown as AppEnv
 
     validateEnv(envMode, env)
@@ -44,6 +45,12 @@ export default defineConfig(({ mode }) => {
 
     return {
         plugins: [react(), tailwindcss()],
+        resolve: {
+            alias: {
+                '@features': path.resolve(__dirname, 'src/features'),
+                '@shared': path.resolve(__dirname, 'src/features'),
+            },
+        },
         server: config,
         preview: config,
         build: {
