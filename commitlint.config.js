@@ -6,6 +6,7 @@ export default {
         'always',
         [
             'feat',           // New feature
+            'update',         // Update to existing feature
             'fix',            // Bug fix
             'docs',           // Documentation-only changes
             'style',          // Formatting, white-space only changes
