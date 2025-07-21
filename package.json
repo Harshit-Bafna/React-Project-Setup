@@ -5,9 +5,10 @@
     "type": "module",
     "scripts": {
         "prepare": "husky",
-        "dev": "vite",
-        "build": "tsc -b && vite build",
-        "preview": "vite preview",
+        "dev": "vite --mode development",
+        "testing": "vite --mode testing",
+        "build": "tsc -b && vite build --mode production",
+        "preview": "vite preview --mode production",
         "lint:eslint": "eslint",
         "lint:stylelint": "stylelint \"**/*.css\"",
         "format:check": "prettier . --check",
