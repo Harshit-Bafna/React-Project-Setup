@@ -8,13 +8,13 @@ import path from 'path'
 type TMode = 'development' | 'test' | 'production'
 
 interface AppEnv {
-    PORT: string
+    VITE_PORT: string
+    VITE_SERVER_URL: string
     VITE_ENV: TMode
-    BACKEND_PROXY: string
 }
 
 const validateEnv = (envMode: TMode, env: AppEnv) => {
-    const requiredVars: (keyof AppEnv)[] = ['PORT', 'VITE_ENV', 'BACKEND_PROXY']
+    const requiredVars: (keyof AppEnv)[] = ['VITE_PORT', 'VITE_ENV', 'VITE_SERVER_URL']
 
     for (const key of requiredVars) {
         if (!env[key]) {
@@ -38,14 +38,14 @@ export default defineConfig(({ mode }) => {
 
     validateEnv(envMode, env)
 
-    const port = normalizePort(env.PORT)
+    const port = normalizePort(env.VITE_PORT)
 
     const config: ServerOptions = {
         port,
         open: true,
         proxy: {
             '/api': {
-                target: env.BACKEND_PROXY,
+                target: env.VITE_SERVER_URL,
                 changeOrigin: true,
                 secure: false,
                 rewrite: (path) => path.replace(/^\/api/, ''),
@@ -93,9 +93,9 @@ export default defineConfig(({ mode }) => {
         preview: config,
         build: {
             minify: true,
-        },
-        rollupOptions: {
-            external: [/.*\.(test|spec)\.(ts|tsx)$/],
+            rollupOptions: {
+                external: [/.*\.(test|spec)\.(ts|tsx)$/],
+            },
         },
     }
 })
