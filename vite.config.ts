@@ -51,6 +51,28 @@ export default defineConfig(({ mode }) => {
             environment: 'jsdom',
             setupFiles: 'src/setupTests.ts',
             include: ['src/**/*.{test,spec}.{ts,tsx}'],
+            coverage: {
+                reporter: ['text', 'json', 'html'],
+                include: ['src/**/*.{ts,tsx}'],
+                exclude: [
+                    'src/**/*.test.{ts,tsx}',
+                    'src/**/*.spec.{ts,tsx}',
+                    'src/setupTests.ts',
+                    'src/vite-env.d.ts',
+                    'src/main.tsx',
+                    'src/index.tsx',
+                    'coverage',
+                    'dist',
+                    'node_modules',
+                    'build',
+                ],
+                thresholds: {
+                    statements: 5,
+                    branches: 5,
+                    functions: 5,
+                    lines: 5,
+                },
+            },
         },
         resolve: {
             alias: {
