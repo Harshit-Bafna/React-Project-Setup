@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
-type TMode = 'development' | 'production'
+type TMode = 'development' | 'test' | 'production'
 
 interface AppEnv {
     PORT: string

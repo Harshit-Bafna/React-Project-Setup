@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-    readonly VITE_ENV: 'development' | 'testing' | 'production'
+    readonly VITE_ENV: 'development' | 'test' | 'production'
 }
