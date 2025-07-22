@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/// <reference types="vitest" />
 import { defineConfig, loadEnv, type ServerOptions } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -45,6 +46,12 @@ export default defineConfig(({ mode }) => {
 
     return {
         plugins: [react(), tailwindcss()],
+        test: {
+            globals: true,
+            environment: 'jsdom',
+            setupFiles: 'src/setupTests.ts',
+            include: ['src/**/*.{test,spec}.{ts,tsx}'],
+        },
         resolve: {
             alias: {
                 '@features': path.resolve(__dirname, 'src/features'),
@@ -55,6 +62,9 @@ export default defineConfig(({ mode }) => {
         preview: config,
         build: {
             minify: true,
+        },
+        rollupOptions: {
+            external: [/.*\.(test|spec)\.(ts|tsx)$/],
         },
     }
 })
