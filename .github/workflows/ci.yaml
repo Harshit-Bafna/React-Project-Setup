@@ -1,0 +1,41 @@
+name: CI Pipeline
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        environment: test
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+
+            - name: Install Dependencies
+              run: npm ci
+
+            - name: Run eslint
+              run: npm run lint:eslint
+
+            - name: Run prettier
+              run: npm run format:check
+
+            - name: Run stylelint
+              run: npm run lint:stylelint
+
+            - name: Check test coverage
+              run: npm run test:coverage
+              env:
+                  PORT: ${{secrets.PORT}}
+                  BACKEND_PROXY: ${{secrets.BACKEND_PROXY}}
+                  VITE_ENV: ${{vars.VITE_ENV}}
